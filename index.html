@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            /* margin: 0; */
+            background-image: linear-gradient(200deg,plum,grey,beige,plum);
+        }
+        button{
+            width:35px;
+            height:35px;
+            border-radius:100%;
+            color:aqua;
+            background-color: grey;
+        
+        }
+       button:hover{
+        background-color: rgba(251, 246, 248,0.7);
+       }
+        input{
+            width:175px;
+            height:55px;
+            background-color: azure;
+        }
+        td{
+            text-align: center;
+            border:none;
+        }
+        #y{
+            margin-left: auto;
+            margin-right: auto;
+            width: 1000px;
+            height: 600px;
+            /* background-color: aqua; */
+            /* background-image: linear-gradient(200deg,black,grey,beige); */
+            
+        }
+        #y::after{
+            clear:both;
+            content:"";
+	display:block;
+	visibility:hidden;
+        }
+        table{
+            margin-left: auto;
+            margin-right: auto;
+            margin-top:200px;
+            background-color: rgba(0,0,0, 0.8);
+            border-radius: 5px;
+        }
+        #ac{
+            color:red;
+        }
+        #eq{
+            background-color: plum;
+            color: black;
+        }
+        #ce,#p,#m,#mu,#mod,#div{
+                color: plum;
+        }
+       
+    </style>
+</head>
+<body>
+    <div id="y">
+    <table  cellpadding="3px" cellspacing="10px"  border="2px" >
+        <tr ><td colspan="4"><input id="screen"></td></tr>
+        <tr>
+           
+           <td><button id="ac">AC</button></td> 
+           <td><button id="ce">CE</button></td> 
+           <td><button class="btn" id="div">/</button></td> 
+           <td><button class="btn" id="mod">%</button></td> 
+        </tr>
+        <tr>
+            <td for="btn"><button class="btn">1</button></td> 
+           <td><button class="btn">2</button></td> 
+           <td><button class="btn">3</button></td> 
+           <td><button class="btn" id="p">+</button></td> 
+        </tr>
+        <tr>
+            <td><button class="btn">4</button></td> 
+            <td><button class="btn">5</button></td> 
+            <td><button class="btn">6</button></td> 
+            <td><button class="btn" id="m">-</button></td> 
+        </tr>
+        <tr> 
+            <td><button class="btn">7</button></td> 
+            <td><button class="btn">8</button></td> 
+            <td><button class="btn">9</button></td> 
+            <td><button class="btn" id="mu">*</button></td> 
+        </tr>
+        <tr>
+            <td><button class="btn">0</button></td> 
+            <td><button class="btn">00</button></td> 
+            <td><button class="btn">.</button></td> 
+            <td><button id="eq">=</button></td> 
+         
+        </tr>
+    </table>
+</div>
+     
+    <script>
+        var  buttonclicked=false
+        let x=document.getElementById("screen")
+        y=document.getElementsByClassName("btn")
+        for(let i=0;i<y.length;i++)
+        {     
+            y[i].addEventListener("click",()=>
+            {   if(buttonclicked)
+              {     x.value=""
+                    buttonclicked=false
+              }
+                str=x.value
+                let l=str.charAt(str.length-1)
+                let p=y[i].innerHTML
+                if((l=="+"||l=="*"||l=="/")&&(p=="+"||p=="*"||p=="/"))
+                { 
+                    x.value=str.slice(0,-1);
+                    x.value=x.value+y[i].innerHTML
+                }
+                else{
+                x.value=x.value+y[i].innerHTML
+                }
+            })
+        }
+    let  ac=document.getElementById("ac")
+    ac.addEventListener("click",()=>
+    {
+        x.value=""
+    })
+    let  ce=document.getElementById("ce")
+    ce.addEventListener("click",()=>
+    {    let tem=x.value
+        //x.value=tem.substring(0,tem.length-1)
+        x.value=tem.slice(0,tem.length-1)
+
+    })
+    let  eq=document.getElementById("eq")
+    eq.addEventListener("click",()=>
+    {     buttonclicked=true;
+        
+        try {
+            x.value=eval(x.value)
+           
+         }
+       catch(err) {
+        x.value = "Invalid format";
+        }
+    
+    })
+    
+    </script>
+</body>
+</html>
